@@ -1,43 +1,524 @@
-<header id="main-header">
-    <nav class="container">
-        <a href="index.html" class="logo">
-            <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="48" stroke="#FFD700" stroke-width="4"/>
-                <path d="M50 25V75" stroke="url(#gold-grad)" stroke-width="5" stroke-linecap="round"/>
-                <path d="M30 50H70" stroke="url(#gold-grad)" stroke-width="5" stroke-linecap="round"/>
-                <defs>
-                    <linearGradient id="gold-grad" x1="50" y1="25" x2="50" y2="75" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#FFD700"/>
-                        <stop offset="1" stop-color="#FFAA00"/>
-                    </linearGradient>
-                </defs>
-            </svg>
-            <span>LUMEN</span>
-        </a>
+<!doctype html>
 
-        <div class="nav-links" id="nav-links">
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li class="dropdown">
-                    <a href="services.html">Services <i data-lucide="chevron-down"></i></a>
-                    <div class="dropdown-content">
-                        <a href="services.html#speech-therapy">Speech Therapy</a>
-                        <a href="services.html#audiology">Audiology</a>
-                        <a href="services.html#hearing-aids">Hearing Aids</a>
-                        <a href="services.html#cochlear-implant">Cochlear Implant</a>
-                    </div>
-                </li>
-                <li><a href="resources.html">Resources</a></li>
-                <li><a href="testimonials.html">Testimonials</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HearWell Clinic | Speech Therapy • Audiology • Hearing Aids</title>
+  <meta name="description" content="HearWell Clinic provides compassionate audiology, speech therapy, and advanced hearing solutions. Book an appointment today." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <meta name="theme-color" content="#1E90FF" />  <!-- JSON-LD Schema -->  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalClinic",
+    "name": "HearWell Clinic",
+    "description": "Compassionate audiology, speech therapy, and hearing aid services.",
+    "url": "https://example.com",
+    "telephone": "+91-9350158754",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Your Clinic Street, Locality",
+      "addressLocality": "Your City",
+      "addressRegion": "Your State",
+      "postalCode": "110000",
+      "addressCountry": "IN"
+    },
+    "openingHours": "Mo-Sa 10:00-18:00",
+    "sameAs": [
+      "https://facebook.com/hearwell",
+      "https://instagram.com/hearwell",
+      "https://linkedin.com/company/hearwell"
+    ]
+  }
+  </script>  <style>
+    :root{
+      --blue:#1E90FF; /* CTAs */
+      --bg:#F0F8FF;   /* Background */
+      --text:#333333; /* Text */
+      --gold:#FFD700; /* Accent */
+      --radius:1.25rem;
+      --shadow:0 10px 30px rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:"Open Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;color:var(--text);background:var(--bg);}
+    h1,h2,h3{font-family:"Lato", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;line-height:1.2;margin:0 0 .5rem}
+    p{line-height:1.7;margin:.5rem 0 1rem}
+    a{color:inherit}
+
+    /* Skip link */
+    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{left:1rem;top:1rem;width:auto;height:auto;z-index:10000;background:#fff;padding:.5rem 1rem;border-radius:.5rem;box-shadow:var(--shadow)}
+
+    /* Container */
+    .container{width:min(1120px, 92%);margin-inline:auto}
+
+    /* Header */
+    header{position:sticky;top:0;z-index:999;background:rgba(255,255,255,.8);backdrop-filter:saturate(140%) blur(10px);box-shadow:0 2px 12px rgba(0,0,0,.06)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:.85rem 0;transition:all .25s ease}
+    header.shrink .nav{padding:.5rem 0}
+    .brand{display:flex;align-items:center;gap:.65rem;text-decoration:none}
+    .brand__logo{width:42px;height:42px;border-radius:999px;background:radial-gradient(60% 60% at 30% 30%, #fff 0, #cfe8ff 100%);display:grid;place-items:center;box-shadow:var(--shadow)}
+    .brand__logo svg{width:24px;height:24px}
+    .brand__name{font-weight:700;letter-spacing:.3px}
+
+    .nav__right{display:flex;align-items:center;gap:.5rem}
+    .btn{appearance:none;border:none;cursor:pointer;border-radius:.9rem;padding:.75rem 1.1rem;font-weight:600;line-height:1;box-shadow:var(--shadow);transition:transform .15s ease, box-shadow .2s ease}
+    .btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+    .btn--ghost{background:#fff}
+    .btn--primary{background:var(--blue);color:#fff}
+    .btn:hover{transform:translateY(-1px)}
+    .phone{display:inline-flex;align-items:center;gap:.5rem;padding:.55rem .9rem;border-radius:.8rem;background:#fff;text-decoration:none}
+
+    /* Hero */
+    .hero{position:relative;isolation:isolate;min-height:78dvh;display:grid;place-items:center;overflow:hidden}
+    #particles{position:absolute;inset:0;z-index:-1}
+    .hero__waves{position:absolute;inset:0;pointer-events:none}
+    .hero__inner{display:grid;gap:1rem;text-align:center;padding:7rem 0 5rem}
+    .hero h1{font-size:clamp(1.8rem,3vw+1rem,3rem)}
+    .hero p{font-size:clamp(1rem, .3vw + .95rem, 1.15rem);opacity:.9}
+    .hero__ctas{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:.5rem}
+
+    /* Section */
+    section{padding:4.5rem 0}
+    .section__header{display:grid;gap:.5rem;text-align:center;margin-bottom:2.2rem}
+    .section__kicker{color:var(--blue);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.9rem}
+
+    /* Services */
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+    .card{position:relative;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);background:#fff;min-height:260px}
+    .card img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.05)}
+    .card__overlay{position:absolute;inset:0;background:rgba(30,144,255,.82);color:#fff;display:grid;place-items:end;opacity:0;transition:opacity .25s ease}
+    .card__content{padding:1rem}
+    .card:hover .card__overlay, .card:focus-within .card__overlay{opacity:1}
+    .card__text{margin:0 0 .75rem}
+
+    /* About */
+    .about{display:grid;grid-template-columns:1.1fr 1fr;gap:2rem;align-items:center}
+    .about img{width:100%;height:auto;border-radius:var(--radius);box-shadow:var(--shadow)}
+
+    /* Testimonials */
+    .testimonial{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem}
+    .testimonial q{quotes:"\201C" "\201D";display:block;font-size:1.05rem}
+    .testimonial q::before{content:open-quote;color:var(--blue);font-size:2rem;line-height:0;position:relative;top:.6rem;margin-right:.25rem}
+
+    /* Contact */
+    .contact{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+    form{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1.25rem;display:grid;gap:1rem}
+    label{font-weight:600}
+    input, select, textarea{width:100%;padding:.8rem .9rem;border:1px solid #dfe7f4;border-radius:.7rem;font:inherit}
+    input:focus, select:focus, textarea:focus{outline:2px solid var(--blue);border-color:transparent}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+    .success{display:none;padding:.75rem;border-radius:.6rem;background:#ecfdf5}
+    .error{display:none;padding:.75rem;border-radius:.6rem;background:#fef2f2}
+
+    /* Footer */
+    footer{background:#fff;margin-top:3rem;padding:2.5rem 0 2rem;border-top:1px solid #eaf0fb}
+    .footer{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:1.5rem}
+    .muted{opacity:.8}
+    .social{display:flex;gap:.6rem}
+    .social a{width:36px;height:36px;display:grid;place-items:center;border-radius:.6rem;border:1px solid #e5eefc}
+    .legal{margin-top:1rem;font-size:.9rem}
+
+    /* Utilities */
+    .hidden{display:none}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .cards{grid-template-columns:1fr 1fr}
+      .about{grid-template-columns:1fr}
+      .contact{grid-template-columns:1fr}
+      .footer{grid-template-columns:2fr 1fr 1fr}
+    }
+    @media (max-width: 640px){
+      .cards{grid-template-columns:1fr}
+      .form-row{grid-template-columns:1fr}
+      .footer{grid-template-columns:1fr 1fr}
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+    }
+  </style></head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>  <header>
+    <div class="container nav" role="navigation" aria-label="Primary">
+      <a class="brand" href="#" aria-label="HearWell Clinic home">
+        <span class="brand__logo" aria-hidden="true">
+          <!-- Simple ear/sound wave icon -->
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M6 10c0-3 2-5 5-5s5 2 5 5c0 2-1 3-2 4-1 1-2 2-2 3" stroke="#1E90FF" stroke-width="2" stroke-linecap="round"/>
+            <path d="M4 10c0-4 3-7 7-7s7 3 7 7" stroke="#1E90FF" stroke-width="2" stroke-linecap="round" opacity=".4"/>
+          </svg>
+        </span>
+        <span class="brand__name">HearWell Clinic</span>
+      </a>
+      <div class="nav__right">
+        <a class="phone" href="tel:9350158754" aria-label="Call us at 9350158754">
+          <span aria-hidden="true">📞</span>
+          <span>9350158754</span>
+        </a>
+        <a href="#contact" class="btn btn--primary">Book an Appointment</a>
+      </div>
+    </div>
+  </header>  <main id="main">
+    <!-- HERO -->
+    <section class="hero" aria-label="Intro">
+      <div id="particles" aria-hidden="true"></div>
+      <canvas class="hero__waves" id="waves" aria-hidden="true"></canvas>
+      <div class="container hero__inner">
+        <h1>Your Journey to Better Hearing Starts Here.</h1>
+        <p>Compassionate care in audiology, speech therapy, and advanced hearing solutions.</p>
+        <div class="hero__ctas">
+          <a href="#contact" class="btn btn--primary">Book a Consultation</a>
+          <a href="#services" class="btn btn--ghost" aria-label="View our services">View Our Services</a>
+        </div>
+      </div>
+    </section><!-- SERVICES -->
+<section id="services" aria-labelledby="services-title">
+  <div class="container">
+    <div class="section__header">
+      <span class="section__kicker">Services</span>
+      <h2 id="services-title">How We Can Help</h2>
+      <p class="muted">Evidence-based care for every stage of your hearing and speech journey.</p>
+    </div>
+
+    <div class="cards" role="list">
+      <!-- Card 1 -->
+      <article class="card" role="listitem" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1600&auto=format&fit=crop" alt="Speech therapist working with a child" loading="lazy" />
+        <div class="card__overlay">
+          <div class="card__content">
+            <h3>Speech Therapy</h3>
+            <p class="card__text">Pediatric and adult therapy for articulation, fluency, language, and voice.</p>
+            <a class="btn btn--ghost" href="/speech-therapy" aria-label="Learn more about Speech Therapy">Learn More →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="card" role="listitem" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1582719478250-80a3c6329f6d?q=80&w=1600&auto=format&fit=crop" alt="Audiologist performing hearing assessment" loading="lazy" />
+        <div class="card__overlay">
+          <div class="card__content">
+            <h3>Audiology Services</h3>
+            <p class="card__text">Hearing evaluations, tympanometry, OAE, BERA, and tinnitus management.</p>
+            <a class="btn btn--ghost" href="/audiology-services" aria-label="Learn more about Audiology Services">Learn More →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="card" role="listitem" tabindex="0">
+        <img src="https://images.unsplash.com/photo-1560264280-88b68371db39?q=80&w=1600&auto=format&fit=crop" alt="Modern hearing aids on a table" loading="lazy" />
+        <div class="card__overlay">
+          <div class="card__content">
+            <h3>Hearing Aids</h3>
+            <p class="card__text">Digital fittings, fine-tuning, pediatric options, and aftercare support.</p>
+            <a class="btn btn--ghost" href="/hearing-aids" aria-label="Learn more about Hearing Aids">Learn More →</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" aria-labelledby="about-title">
+  <div class="container about">
+    <img src="https://images.unsplash.com/photo-1582719478250-b75aa7c1b9a6?q=80&w=1600&auto=format&fit=crop" alt="HearWell Clinic reception area" loading="lazy" />
+    <div>
+      <div class="section__header" style="text-align:left;margin:0 0 1rem">
+        <span class="section__kicker">About</span>
+        <h2 id="about-title">About HearWell Clinic</h2>
+      </div>
+      <p>We combine clinical expertise with a warm, human approach. Our team of audiologists and speech-language pathologists provides personalized care backed by the latest science.</p>
+      <p>From comprehensive evaluations to advanced hearing aid fittings and collaborative therapy plans, we’re here for your family at every step.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" aria-labelledby="testimonials-title">
+  <div class="container">
+    <div class="section__header">
+      <span class="section__kicker">Testimonials</span>
+      <h2 id="testimonials-title">What Patients Say</h2>
+    </div>
+
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <article class="testimonial">
+            <q>Professional, kind, and results-driven. My mother’s hearing has improved dramatically.</q>
+            <p><strong>Rohit K.</strong> • Gurugram • Service: Hearing Aid Fitting</p>
+          </article>
+        </div>
+        <div class="swiper-slide">
+          <article class="testimonial">
+            <q>They explained every step and made my child feel comfortable. Highly recommended!</q>
+            <p><strong>Asha S.</strong> • Hisar • Service: Pediatric Speech Therapy</p>
+          </article>
+        </div>
+        <div class="swiper-slide">
+          <article class="testimonial">
+            <q>State-of-the-art tests with a very human touch. Five stars.</q>
+            <p><strong>Meera P.</strong> • Bhiwani • Service: Audiology Assessment</p>
+          </article>
+        </div>
+      </div>
+      <div class="swiper-pagination" aria-label="Testimonials pagination"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" aria-labelledby="contact-title">
+  <div class="container contact">
+    <div>
+      <div class="section__header" style="text-align:left;margin:0 0 1rem">
+        <span class="section__kicker">Contact</span>
+        <h2 id="contact-title">Book an Appointment</h2>
+      </div>
+
+      <div class="success" role="status" id="formSuccess">Thank you! Your message has been sent.</div>
+      <div class="error" role="alert" id="formError">Something went wrong. Please try again.</div>
+
+      <form id="contactForm" novalidate aria-describedby="formHelp">
+        <div class="form-row">
+          <div>
+            <label for="name">Full Name *</label>
+            <input id="name" name="name" type="text" required autocomplete="name" />
+          </div>
+          <div>
+            <label for="email">Email *</label>
+            <input id="email" name="email" type="email" required autocomplete="email" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label for="phone">Phone Number *</label>
+            <input id="phone" name="phone" type="tel" required inputmode="tel" autocomplete="tel" />
+          </div>
+          <div>
+            <label for="service">Service of Interest *</label>
+            <select id="service" name="service" required>
+              <option value="" selected disabled>Select one</option>
+              <option>General Inquiry</option>
+              <option>Speech Therapy</option>
+              <option>Audiology</option>
+              <option>Hearing Aids</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label for="message">Message *</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
         </div>
 
-        <a href="appointments.html" class="btn btn-primary btn-glow">Book Appointment</a>
+        <!-- Google reCAPTCHA v3 placeholder -->
+        <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response" />
 
-        <button id="menu-toggle" class="menu-toggle" aria-label="Open Menu">
-            <div class="hamburger"></div>
-        </button>
-    </nav>
-</header>
+        <button class="btn btn--primary" type="submit">Send Message</button>
+        <p id="formHelp" class="muted" style="margin: .5rem 0 0">We respect your privacy. We’ll get back to you within 24 hours.</p>
+      </form>
+    </div>
+
+    <div>
+      <h3 style="margin-top:0">Visit Our Clinic</h3>
+      <p>
+        HearWell Clinic<br />
+        Your Street, Locality<br />
+        Your City, State 110000
+      </p>
+      <p>
+        <strong>Hours:</strong> Mon–Sat 10:00–18:00<br />
+        <strong>Phone:</strong> <a href="tel:9350158754">9350158754</a><br />
+        <strong>Email:</strong> <a href="mailto:hello@hearwell.example">hello@hearwell.example</a>
+      </p>
+      <div style="border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)">
+        <iframe title="HearWell Clinic on Google Maps" src="https://maps.google.com/maps?q=Your%20City&t=m&z=14&output=embed&iwloc=near" width="100%" height="280" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="border:0"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </main>  <footer>
+    <div class="container footer">
+      <div>
+        <a class="brand" href="#">
+          <span class="brand__logo" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M6 10c0-3 2-5 5-5s5 2 5 5c0 2-1 3-2 4-1 1-2 2-2 3" stroke="#1E90FF" stroke-width="2" stroke-linecap="round"/>
+              <path d="M4 10c0-4 3-7 7-7s7 3 7 7" stroke="#1E90FF" stroke-width="2" stroke-linecap="round" opacity=".4"/>
+            </svg>
+          </span>
+          <span class="brand__name">HearWell Clinic</span>
+        </a>
+        <p class="muted">Compassionate audiology and speech therapy for all ages.</p>
+        <div class="social" aria-label="Social media">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Instagram">ig</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+        </div>
+        <p class="legal muted">© <span id="year"></span> HearWell Clinic • All rights reserved</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul class="muted" style="list-style:none;padding:0;margin:0;display:grid;gap:.35rem">
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p class="muted">Phone: <a href="tel:9350158754">9350158754</a><br>Email: <a href="mailto:hello@hearwell.example">hello@hearwell.example</a></p>
+      </div>
+      <div>
+        <h4>Location</h4>
+        <p class="muted">Your Street, Locality<br>Your City, State</p>
+      </div>
+    </div>
+  </footer>  <!-- Vendor Scripts -->  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script>  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>  <!-- App JS -->  <script>
+    // Utilities
+    const $ = (s, sc=document) => sc.querySelector(s);
+
+    // Sticky header shrink
+    const onScroll = () => {
+      const scrolled = window.scrollY > 8;
+      document.querySelector('header').classList.toggle('shrink', scrolled);
+    };
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Particles background
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.particlesJS) {
+        particlesJS('particles', {
+          particles: {
+            number: { value: 45, density: { enable: true, value_area: 900 } },
+            color: { value: '#1E90FF' },
+            shape: { type: 'circle' },
+            opacity: { value: 0.25 },
+            size: { value: 3, random: true },
+            line_linked: { enable: true, distance: 150, color: '#1E90FF', opacity: 0.2, width: 1 },
+            move: { enable: true, speed: 2, out_mode: 'out' }
+          },
+          interactivity: { detect_on: 'canvas', events: { onhover: { enable: false }, onclick: { enable: false } } },
+          retina_detect: true
+        });
+      }
+    });
+
+    // Canvas sound waves (GSAP-driven)
+    const canvas = document.getElementById('waves');
+    const ctx = canvas.getContext('2d');
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    function resizeCanvas(){
+      const { width } = canvas.getBoundingClientRect();
+      const height = 340;
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+    }
+    const waves = [
+      { amp: 12, len: 180, speed: 0.6, alpha: 0.45 },
+      { amp: 18, len: 220, speed: 0.4, alpha: 0.30 },
+      { amp: 26, len: 260, speed: 0.25, alpha: 0.18 }
+    ];
+    let t = 0;
+    function draw(){
+      const { width } = canvas.getBoundingClientRect();
+      const height = canvas.height / dpr;
+      ctx.clearRect(0,0,width,height);
+      waves.forEach((w,i)=>{
+        ctx.beginPath();
+        for(let x=0;x<width;x++){
+          const y = height/2 + Math.sin((x + t * (i+1) * w.speed)/w.len) * w.amp;
+          if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+        }
+        ctx.strokeStyle = `rgba(30,144,255,${w.alpha})`;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      });
+      t += 1.5;
+      requestAnimationFrame(draw);
+    }
+    resizeCanvas();
+    draw();
+    window.addEventListener('resize', resizeCanvas);
+
+    // GSAP scroll animations
+    window.addEventListener('load', () => {
+      if (window.gsap && window.ScrollTrigger){
+        gsap.utils.toArray('section').forEach((sec) => {
+          gsap.fromTo(sec.querySelector('.section__header'), { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: .7, ease: 'power2.out', scrollTrigger: { trigger: sec, start: 'top 80%' } });
+        });
+        gsap.utils.toArray('.card').forEach((card, i) => {
+          gsap.from(card, { y: 28, opacity: 0, duration: .6, ease: 'power2.out', delay: i * 0.05, scrollTrigger: { trigger: card, start: 'top 90%' } });
+        });
+      }
+    });
+
+    // Swiper testimonials
+    window.addEventListener('load', () => {
+      if (window.Swiper){
+        new Swiper('.swiper', {
+          loop: true,
+          autoplay: { delay: 4000, disableOnInteraction: false },
+          pagination: { el: '.swiper-pagination', clickable: true },
+          slidesPerView: 1,
+          spaceBetween: 16
+        });
+      }
+    });
+
+    // Contact form (client-side validation + AJAX)
+    const form = document.getElementById('contactForm');
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const success = document.getElementById('formSuccess');
+      const error = document.getElementById('formError');
+      success.style.display = 'none';
+      error.style.display = 'none';
+
+      // Basic validation
+      if(!form.checkValidity()){
+        form.reportValidity();
+        return;
+      }
+
+      // TODO: Replace with your form endpoint (e.g., FormSubmit, Netlify, custom API)
+      // Example for FormSubmit:
+      // const endpoint = 'https://formsubmit.co/YOUREMAIL@example.com';
+      const endpoint = 'https://httpbin.org/post'; // demo endpoint
+
+      const data = new FormData(form);
+      try{
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        if(res.ok){ success.style.display = 'block'; form.reset(); }
+        else { throw new Error('Network response was not ok'); }
+      }catch(err){
+        error.style.display = 'block';
+        console.error(err);
+      }
+    });
+
+    // Year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
